@@ -115,37 +115,49 @@ export default function Home() {
             No posts found in this category.
           </div>
         ) : (
-          <div className="space-y-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredPosts.map((post) => (
               <Link
                 key={post._id}
                 to={`/blog/${getCategorySlug(post)}/${post.slug.current}`}
-                className="no-underline text-black block group"
+                className="no-underline text-black block group h-full"
               >
-                <article className="transition-transform duration-300 hover:-translate-y-1">
+                <article className="transition-all duration-300 hover:-translate-y-1 h-full flex flex-col bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-lg hover:shadow-gray-100">
                   {post.mainImage && (
-                    <div className="overflow-hidden rounded-xl mb-5">
+                    <div className="overflow-hidden aspect-[16/10] bg-gray-55">
                       <img
-                        src={urlFor(post.mainImage).width(1000).url()}
+                        src={urlFor(post.mainImage).width(600).height(375).url()}
                         alt={post.title}
-                        className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                       />
                     </div>
                   )}
 
-                  {post.subtitle && (
-                    <h2 className="text-3xl font-bold mb-3 transition-colors duration-200 group-hover:text-[#14C1F4]">
-                      {post.subtitle}
-                    </h2>
-                  )}
+                  <div className="p-6 flex-1 flex flex-col">
+                    {post.categories?.[0] && (
+                      <span className="text-xs font-bold text-[#14C1F4] uppercase tracking-wider mb-2 block">
+                        {post.categories[0].title}
+                      </span>
+                    )}
 
-                  <p className="text-gray-600 mt-2.5">
-                    {post.excerpt}
-                  </p>
+                    {post.subtitle && (
+                      <h2 className="text-xl font-bold mb-2.5 leading-snug transition-colors duration-200 group-hover:text-[#14C1F4] line-clamp-2">
+                        {post.subtitle}
+                      </h2>
+                    )}
 
-                  <p className="mt-2.5 text-gray-400 text-sm">
-                    {new Date(post._createdAt).toLocaleDateString()}
-                  </p>
+                    <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                      {post.excerpt}
+                    </p>
+
+                    <p className="mt-auto text-gray-400 text-xs">
+                      {new Date(post._createdAt).toLocaleDateString(undefined, {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </p>
+                  </div>
                 </article>
               </Link>
             ))}
