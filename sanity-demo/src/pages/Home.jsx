@@ -16,7 +16,7 @@ export default function Home() {
           title,
           slug,
           _createdAt,
-          subtitle,
+          thumbnailTitle,
           excerpt,
           mainImage,
           categories[]->{
@@ -140,9 +140,9 @@ export default function Home() {
                       </span>
                     )}
 
-                    {post.subtitle && (
+                    {post.thumbnailTitle && (
                       <h2 className="text-xl font-bold mb-2.5 leading-snug transition-colors duration-200 group-hover:text-[#14C1F4] line-clamp-2">
-                        {post.subtitle}
+                        {post.thumbnailTitle}
                       </h2>
                     )}
 

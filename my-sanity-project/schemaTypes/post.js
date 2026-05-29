@@ -19,6 +19,12 @@ export default defineType({
     }),
 
     defineField({
+      name: 'thumbnailTitle',
+      title: 'Thumbnail Title',
+      type: 'string',
+    }),
+
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
